@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #3498db; /* Background color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff; /* Container background color */
+            max-width: 400px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Box shadow for a card-like effect */
+            border-radius: 8px; /* Rounded corners */
+        }
+        h1 {
+            text-align: center;
+            color: #333; /* Text color */
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f9f9f9; /* Task item background color */
+            border: 1px solid #ddd; /* Task item border */
+            border-radius: 4px; /* Rounded corners for task items */
+        }
+        input[type="text"] {
+            width: 70%; /* Adjusted width */
+            padding: 10px; /* Increased padding */
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #ff6666; /* Button background color */
+            color: #fff; /* Button text color */
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .add-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px; /* Added margin to create space */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ToDo List</h1>
+        <div class="add-container">
+            <input type="text" id="task" placeholder="Add a new task">
+            <button id="add">Add</button>
+        </div>
+        <ul id="task-list">
+        </ul>
+    </div>
+
+    <script>
+        const taskInput = document.getElementById("task");
+        const taskList = document.getElementById("task-list");
+        const addButton = document.getElementById("add");
+
+        addButton.addEventListener("click", function () {
+            const taskText = taskInput.value;
+            if (taskText) {
+                const listItem = document.createElement("li");
+                const taskLabel = document.createElement("span");
+                taskLabel.innerText = taskText;
+                const deleteButton = document.createElement("button");
+                deleteButton.innerText = "Delete";
+
+                deleteButton.addEventListener("click", function () {
+                    taskList.removeChild(listItem);
+                });
+
+                listItem.appendChild(taskLabel);
+                listItem.appendChild(deleteButton);
+                taskList.appendChild(listItem);
+
+                taskInput.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
